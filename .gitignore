@@ -67,3 +67,4 @@ dkms.conf
 *.recipe
 *.testlog
 *.manifest
+7_Segment_Display/Debug
