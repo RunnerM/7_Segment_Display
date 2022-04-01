@@ -1,7 +1,8 @@
 # 7_Segment_Display
 
-Array of numbers:
-# a b c d e f g dp | hex
+#Array of numbers:
+
+n a b c d e f g dp | hex
 0 1 1 1 1 1 1 1 1  | 0xFF
 1 1 0 0 1 1 1 1 1  | 0x9F
 2 0 0 1 0 0 1 0 1  | 0x25
