@@ -59,3 +59,11 @@ dkms.conf
 *.opendb
 *.xml
 7_Segment_Display_Test/packages
+*.lastbuildstate
+*.tlog
+*.log
+*.txt
+*.CopyComplete
+*.recipe
+*.testlog
+*.manifest
