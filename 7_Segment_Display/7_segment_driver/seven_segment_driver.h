@@ -4,7 +4,8 @@
  * Created: 2022-04-01 9:07:06 AM
  *  Author: pente
  */ 
-#include "avr/io.h"
+#include <avr/io.h>
+#include <avr/interrupt.h>
 
 #ifndef SEVEN_SEGMENT_DRIVER_H_
 #define SEVEN_SEGMENT_DRIVER_H_
