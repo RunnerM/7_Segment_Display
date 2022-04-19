@@ -68,3 +68,4 @@ dkms.conf
 *.testlog
 *.manifest
 7_Segment_Display/Debug
+*.lock
