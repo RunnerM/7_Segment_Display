@@ -10,85 +10,67 @@
 
 uint16_t currentValue;
 int DigitCounter;
-int Digits [4];
-int DecDigits [4];
+
+uint8_t first_digit = ZERO;
+uint8_t second_digit = ONE;
+uint8_t third_digit = TWO;
+uint8_t fourth_digit = THREE;
+uint8_t numbers[] = {ZERO,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE};
 
 
 void init_display(){
-	
-	//Set Up Timer (30-60HZ)
-	
+	OCR4A = 1249; // 100Hz
+	TCCR4B |= _BV(WGM42);// Setting the timer to CTC mode.
+	TCCR4B |= _BV(CS41) | _BV(CS40); //Prescaler 64
+	TCCR4A |= _BV(COM4A0);// Output compare match
+	TIMSK4 |= _BV(OCIE4A);//Enabling the mask of the timer.
 	//Set Up SPI 
 	DDRB |= 1 << 0| 1 << 1 | 1 << 2;
 	DDRF |=  1 << 0| 1 << 1 | 1 << 2 | 1 << 3;
 	
-	SPCR &= ~(0 << DORD | 0 << CPHA | 0 << CPOL);
-	SPCR |= 1 << MSTR;
-	//SPI speed
-	SPCR &= ~(0 << SPR1 | 0 << SPR0);
+	
+	//data order, leading edge, 
+	SPCR &= ~(1 << DORD | 1 << CPHA);
+	// Master and enable, polarity rising edge.
+	SPCR |= 1 << MSTR | 1 << SPE | 1 << CPOL | 1 << SPE | 1 << DORD;
+	//SPI speed CLK/2
+	SPCR &= ~(1 << SPR1 | 1 << SPR0);
 	SPSR |= 1 << SPI2X;
 
 	PORTB |= 1 << PB0;
-	
+	sei();
 }
 void printint_4u(uint16_t value){
-	currentValue = value;
-	for (int i = 0; i<=4 ; i++)
-	{
-		switch(value % 10){
-			case 0:{
-				Digits[i]=ZERO;
-			}
-			case 1:{
-				Digits[i]=ONE;
-			}
-			case 2:{
-				Digits[i]=TWO;
-			}
-			case 3:{
-				Digits[i]=THREE;
-			}
-			case 4:{
-				Digits[i]=FOUR;
-			}
-			case 5:{
-				Digits[i]=FIVE;
-			}
-			case 6:{
-				Digits[i]=SIX;
-			}
-			case 7:{
-				Digits[i]=SEVEN;
-			}
-			case 8:{
-				Digits[i]=EIGHT;
-			}
-			case 9:{
-				Digits[i]=NINE;
-			}
-		}
-	 	value /= 10;
-	}
-	
-}
-void printint_4s(uint16_t value){
-	
+	first_digit = numbers[value/1000];
+	second_digit = numbers[(value%1000/100)];
+	third_digit = numbers[(value%100/10)];
+	fourth_digit = numbers[(value%10/1)];
 }
 
 ISR(SPI_STC_vect){
-	//save shift register value here..
-	PORTF |=  1 << DigitCounter;
-	if (DigitCounter== 3)
+	PORTF |=  1 << DigitCounter; // pulse
+	PORTF &=  ~(1 << DigitCounter);
+	DigitCounter++;
+	if (DigitCounter== 4)
 	{
 		DigitCounter=0;
 	}else{
-		DigitCounter++;
-		SPDR = Digits[DigitCounter];
+		switch (DigitCounter)
+		{
+			case 1:{
+				SPDR = second_digit;
+			}
+			case 2:{
+				SPDR = third_digit;
+			}
+			case 3:{
+				SPDR = fourth_digit;
+			}
+		}
 	}
 }
 
-ISR(TIMER0_COMPA_vect){
-	
+ISR(TIMER4_COMPA_vect){
+	DigitCounter=0;
+	SPDR = first_digit;
 }
-
-

@@ -24,8 +24,5 @@
 
 void init_display();
 void printint_4u(uint16_t value);
-void printint_4s(uint16_t value);
-
-
 
 #endif /* SEVEN_SEGMENT_DRIVER_H_ */
