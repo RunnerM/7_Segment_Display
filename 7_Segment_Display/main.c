@@ -21,17 +21,6 @@ int main(void)
     /* Replace with your application code */
     while (1) 
     {
-// 		i=0;
-// 		while (i<100)
-// 		{
-// 			printint_4u(i);
-// 			i++;
-// 			j=0;
-// 			while (j<10000)
-// 			{
-// 				j++;
-// 			}
-// 		}
     }
 }
 

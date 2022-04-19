@@ -22,9 +22,9 @@ uint8_t i =0;
 
 void init_display(){
 	cli();
-	OCR4A = 1249; // 100Hz
+	OCR4A = 312; // 5KHz 
 	TCCR4B |= _BV(WGM42);// Setting the timer to CTC mode.
-	TCCR4B |= /*_BV(CS41) |*/ _BV(CS40); //Prescaler 64
+	TCCR4B |= _BV(CS41);// Prescaler 8
 	TCCR4A |= _BV(COM4A0);//Output compare match
 	TIMSK4 |= _BV(OCIE4A);//Enabling the mask of the timer.
 	//Set Up SPI 
@@ -75,7 +75,7 @@ ISR(SPI_STC_vect){
 			}
 		}
 	}
-	PORTF |=  1 << DigitCounter-1; // pulse
+	PORTF |=  1 << (DigitCounter-1); // pulse
 }
 
 ISR(TIMER4_COMPA_vect){
