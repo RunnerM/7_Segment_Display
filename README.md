@@ -1,15 +1,3 @@
-# 7_Segment_Display
+# 7 Segment Display driver 
 
-#Array of numbers:
 
-n a b c d e f g dp | hex
-0 1 1 1 1 1 1 1 1  | 0xFF
-1 1 0 0 1 1 1 1 1  | 0x9F
-2 0 0 1 0 0 1 0 1  | 0x25
-3 0 0 0 0 1 1 0 1  | 0xD
-4 1 0 1 0 1 0 0 1  | 0x169
-5 0 1 0 0 1 0 0 1  | 0x49
-6 0 1 0 0 0 0 0 1  | 0x65
-7 0 0 0 1 1 1 1 1  | 0x1F
-8 0 0 0 0 0 0 0 1  | 0x1
-9 0 0 0 0 1 0 0 1  | 0x9
