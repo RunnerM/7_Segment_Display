@@ -9,21 +9,33 @@
 #include "drivers/TMP36GRTZ.h"
 
 void thermometer_callback(float result);
+int i,j ;
 
 
 int main(void)
 {
-	//init_termometer(thermometer_callback);
+	init_termometer(thermometer_callback);
 	init_display();
-	printint_4u(2222);
+	printint_4u(0000);
 	
     /* Replace with your application code */
     while (1) 
     {
+// 		i=0;
+// 		while (i<100)
+// 		{
+// 			printint_4u(i);
+// 			i++;
+// 			j=0;
+// 			while (j<10000)
+// 			{
+// 				j++;
+// 			}
+// 		}
     }
 }
 
 void thermometer_callback(float result){
-	//printint_4u(result);
+	printint_4u(result);
 }
 
