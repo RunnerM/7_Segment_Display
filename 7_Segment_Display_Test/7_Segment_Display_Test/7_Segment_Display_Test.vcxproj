@@ -36,12 +36,14 @@
     <IncludePath>$(VC_IncludePath);C:\Users\pente\UNI\HWP\7_Segment_Display\7_Segment_Display\7_segment_driver;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\7_Segment_Display\7_segment_driver\seven_segment_driver.c" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\7_Segment_Display\7_segment_driver\seven_segment_driver.h" />
     <ClInclude Include="forced_include.h" />
   </ItemGroup>
   <ItemDefinitionGroup />
